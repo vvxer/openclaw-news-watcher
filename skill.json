@@ -1,0 +1,53 @@
+{
+  "name": "news-watcher",
+  "version": "1.0.0",
+  "description": "Real-time CoinDesk crypto news monitor using Playwright. No API keys or login required.",
+  "author": "Community",
+  "license": "MIT",
+  "keywords": ["crypto", "news", "playwright", "monitor", "telegram", "coindesk", "automation"],
+  "engines": {
+    "openclaw": ">=2026.2.0"
+  },
+  "requires": {
+    "bins": ["node"],
+    "env": ["TELEGRAM_CHAT_ID"]
+  },
+  "tools": [
+    {
+      "name": "news_watch",
+      "command": "node scripts/watch-news.js",
+      "description": "Monitor CoinDesk for new articles. Fetches full text, summarizes with OpenClaw Agent, sends to Telegram.",
+      "params": {
+        "site": {
+          "type": "string",
+          "description": "Site to monitor: 'coindesk' (default) or 'panews'",
+          "default": "coindesk"
+        },
+        "check_interval": {
+          "type": "number",
+          "description": "Check interval in seconds (default: 60)",
+          "default": 60
+        }
+      }
+    }
+  ],
+  "env": {
+    "TELEGRAM_CHAT_ID": {
+      "description": "Telegram chat ID to send notifications to"
+    },
+    "OPENCLAW_MJS": {
+      "description": "Path to openclaw.mjs (auto-detected if openclaw is in PATH)"
+    },
+    "CHROME_PATH": {
+      "description": "Path to Chrome executable (auto-detected by OS)"
+    },
+    "OPENCLAW_AGENT_ID": {
+      "description": "OpenClaw agent ID for summarization (default: main)",
+      "default": "main"
+    },
+    "PLAYWRIGHT_HEADLESS": {
+      "description": "Run browser in headless mode (default: true)",
+      "default": "true"
+    }
+  }
+}
